@@ -11,27 +11,28 @@ export function ThemeToggle() {
   // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null;
-
-  return (
-    <div className="relative h-6 w-12 rounded-full bg-secondary p-1 shadow-inner transition-colors duration-300">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className={`absolute top-0 h-6 w-6 rounded-full p-0 transition-all duration-500 ${
-          theme === "dark" 
-            ? "left-6 bg-indigo-900 text-yellow-300" 
-            : "left-0 bg-sky-500 text-yellow-200"
-        }`}
-      >
-        {theme === "dark" ? (
-          <Moon className="h-3 w-3" />
-        ) : (
-          <Sun className="h-3 w-3" />
-        )}
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="icon" className="h-8 w-8 bg-white/90 text-gray-900">
+        <Sun className="h-4 w-4" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-    </div>
+    );
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="h-8 w-8 border-0"
+    >
+      {theme === "dark" ? (
+        <Moon className="h-4 w-4" />
+      ) : (
+        <Sun className="h-4 w-4" />
+      )}
+      <span className="sr-only">Toggle theme</span>
+    </Button>
   );
 }
