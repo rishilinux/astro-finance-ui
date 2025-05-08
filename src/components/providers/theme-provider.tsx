@@ -15,7 +15,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "light", // Default to light to ensure visibility
+  theme: "light",
   setTheme: () => null,
 };
 
@@ -23,7 +23,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "light", // Default to light
+  defaultTheme = "light",
   storageKey = "fenty-ui-theme",
   ...props
 }: ThemeProviderProps) {
@@ -55,13 +55,17 @@ export function ThemeProvider({
       root.classList.add(theme);
     }
     
-    // Force background color to ensure visibility
+    // Ensure visibility by setting explicit background and text colors
     if (theme === "light") {
-      document.body.style.backgroundColor = "hsl(210, 50%, 98%)";
-      document.body.style.color = "hsl(222.2, 84%, 4.9%)";
+      document.documentElement.style.setProperty('--background', '210 50% 98%');
+      document.documentElement.style.setProperty('--foreground', '222.2 84% 4.9%');
+      document.body.style.backgroundColor = "#f8fafc";
+      document.body.style.color = "#0f172a";
     } else {
-      document.body.style.backgroundColor = "hsl(222, 47%, 11%)";
-      document.body.style.color = "hsl(210, 40%, 98%)";
+      document.documentElement.style.setProperty('--background', '222 47% 11%');
+      document.documentElement.style.setProperty('--foreground', '210 40% 98%');
+      document.body.style.backgroundColor = "#1e293b";
+      document.body.style.color = "#f1f5f9";
     }
   }, [theme]);
 

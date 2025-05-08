@@ -11,11 +11,11 @@ import Dashboard from "./pages/Dashboard";
 import Workspace from "./pages/Workspace";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import "./index.css"; // Ensure CSS is properly imported
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Force light theme initially to ensure visibility
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light">
